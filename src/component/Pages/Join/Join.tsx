@@ -1,30 +1,17 @@
 import React, { useState } from 'react';
 // import { State } from '../../App/App'
+import { JoinState } from '../../common/stateInterface';
+type JoinProps = {
+  appUserState:(id: any, password: any, userName: any, userBirth: any) => void,
+};
 
-interface State {
-  input: {
-    id: string,
-    password: string,
-    checkPW: string,
-    userName: string,
-    userBirth: string,
-  },
-  userInfo: {
-    id: string,
-    password: string,
-    userName: string,
-    userBirth: string,
-  },
-  [key: string]: any,
-}
-const Join = (
-  // props:any
-  // state: State['input, userInfo']
-) => {
+const Join:React.FC<JoinProps> = ({
+  appUserState
+}) => {
   // console.log(state);
   // const [joinInput, setJoinInput] = useState<State['joinInput']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '' });
-  const [input, setInput] = useState<State['input']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '', });
-  const [userInfo, setUserInfo] = useState<State['userInfo']>({ id: '', password: '', userName: '', userBirth: '' });
+  const [input, setInput] = useState<JoinState['input']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '', });
+  const [userInfo] = useState<JoinState['userInfo']>({ id: '', password: '', userName: '', userBirth: '' });
 
 
   //인풋 아이디 온체인지 함수
@@ -84,20 +71,11 @@ const Join = (
   // 회원가입버튼 클릭
   const joinButton = (e: any) => {
     e.preventDefault();//기본기능 막기
-
-    // let dumyUserData = {
-    //   id: input.id,
-    //   password: input.password,
-    //   userName: input.userName,
-    //   userBirth: input.userBirth,
-    // }
     console.log("인풋 값 ", input);
-    setUserInfo({
-      id: input.id,
-      password: input.password,
-      userName: input.userName,
-      userBirth: input.userBirth,
-    })
+
+    //App userInfo에 SetState
+    appUserState(input.id, input.password, input.userName, input.userBirth);
+
     //값 초기화
     setInput({
       id: '',
@@ -120,7 +98,7 @@ const Join = (
             <label htmlFor="">id</label>
           </div>
           <div>
-            <input type="text" placeholder="id입력" defaultValue={input.id}
+            <input type="text" placeholder="id입력" value={input.id}
               onChange={onChangeInputId}
             />
           </div>
@@ -166,5 +144,3 @@ const Join = (
 }
 
 export default Join;
-
-
