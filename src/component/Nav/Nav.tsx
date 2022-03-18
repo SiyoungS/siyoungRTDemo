@@ -16,13 +16,13 @@ interface State {
 const Nav = () => {
   const [menuToggle, setMenuToggle] = useState<State['menuToggle']>(false);
   const [currentPageIndex, setCurrentPageIndex] = useState<State['currentPageIndex']>(0);
-  const [menus, setMenus] = useState<State['menus']>(
+  const [menus] = useState<State['menus']>(
     [
       { name: "Main", address: "/" },
       { name: "Join", address: "/Join" },
     ]);
 
-
+  console.log('test:',menuToggle,'\n',currentPageIndex)
   //대문자로 사용
   const UseStateMenuToggle = (flag: boolean, idx: React.SetStateAction<number>) => {
     setMenuToggle(flag);

@@ -1,4 +1,6 @@
-
+/**
+ * App State Interface
+ */
 export interface AppState {
     userInfo: {
         id: string,
@@ -9,6 +11,9 @@ export interface AppState {
     [key: string]: any;
 }
 
+/**
+ * Join State Interface
+ */
 export interface JoinState {
     input: {
       id: string,

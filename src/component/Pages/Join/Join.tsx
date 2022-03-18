@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-// import { State } from '../../App/App'
 import { JoinState } from '../../common/stateInterface';
+/**
+ * JoinProps type 셋팅
+ */
 type JoinProps = {
   appUserState:(id: any, password: any, userName: any, userBirth: any) => void,
 };
 
 const Join:React.FC<JoinProps> = ({
+  //props 받아오기
   appUserState
 }) => {
-  // console.log(state);
-  // const [joinInput, setJoinInput] = useState<State['joinInput']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '' });
+  
   const [input, setInput] = useState<JoinState['input']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '', });
   const [userInfo] = useState<JoinState['userInfo']>({ id: '', password: '', userName: '', userBirth: '' });
 
@@ -76,7 +78,7 @@ const Join:React.FC<JoinProps> = ({
     //App userInfo에 SetState
     appUserState(input.id, input.password, input.userName, input.userBirth);
 
-    //값 초기화
+    //Join 값 초기화
     setInput({
       id: '',
       password: '',
@@ -139,7 +141,6 @@ const Join:React.FC<JoinProps> = ({
       </div>
       <button onClick={joinButton}>회원가입</button>
     </div>
-    //콜백으로 받은 값을 더미데이터로 app에 저장, id만 defaultValue로 안쓰면 오류남, 
   )
 }
 

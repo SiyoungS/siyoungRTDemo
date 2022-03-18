@@ -3,13 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../Pages/Home'
 import Join from '../Pages/Join';
 import { AppState } from '../common/stateInterface';
+import Nav from '../Nav/Nav'
 
 const App = () => {
   
-  // const [joinInput, setJoinInput] = useState<State['joinInput']>({ id: '', password: '', checkPW: '', userName: '', userBirth: '' });
-  // console.log("셑조인인풋 ::: ", setJoinInput);
-  // console.log("조인인풋 ::: ", joinInput);
-  // console.log(props);
   const [userInfo, setUserInfo] = useState<AppState['userInfo']>({ id: '', password: '', userName: '', userBirth: '' });
   console.log('App States :', userInfo);
 
@@ -28,8 +25,10 @@ const App = () => {
     userName:userName,
     userBirth:userBirth
   });
+
   return (
     <BrowserRouter>
+    <Nav></Nav>
       <Routes>
         <Route path='/join' element={<Join
           appUserState={settingStates}
