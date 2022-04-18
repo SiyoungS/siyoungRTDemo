@@ -20,9 +20,10 @@ const Nav = () => {
     [
       { name: "Main", address: "/" },
       { name: "Join", address: "/Join" },
+      { name: "Todo", address: "/Todo" }
     ]);
 
-  console.log('test:',menuToggle,'\n',currentPageIndex)
+  console.log('test:', menuToggle, '\n', currentPageIndex)
   //대문자로 사용
   const UseStateMenuToggle = (flag: boolean, idx: React.SetStateAction<number>) => {
     setMenuToggle(flag);
