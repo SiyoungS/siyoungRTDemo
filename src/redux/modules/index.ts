@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import join from './join';
 import todos from './todos';
+import users from './users';
 
 const rootReducer = combineReducers({
   todos,
-  join
-
+  users,
 });
 
 // 루트 리듀서를 내보내주세요.

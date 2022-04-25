@@ -5,7 +5,7 @@
     "sourceMap": true,
     "target": "es2017",
     "jsx": "preserve",
-    "module":"ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "baseUrl": "./src",
     "experimentalDecorators": true,

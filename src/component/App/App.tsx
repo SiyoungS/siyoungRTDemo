@@ -34,7 +34,7 @@ const App = () => {
         <Route path='/join' element={<JoinApp />} />
         <Route path='/todo' element={<TodoApp />} />
         <Route path='/' element={<Home />} />
-        <Route path='login' element={<Login />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

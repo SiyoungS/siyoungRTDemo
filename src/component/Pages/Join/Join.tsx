@@ -146,71 +146,40 @@
 
 // export default Join;
 
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
-type JoinProps = {
-  onInsert: (user: { id: string, password: string, checkPW: string, userName: string, userBirth: string }) => void;
+type UserProps = {
+  onInsert: (user: { id: string, password: string, userName: string, userBirth: string }) => void;
 }
-function JoinInsert({ onInsert }: JoinProps) {
-  const [user, setUser] = useState({ id: '', password: '', checkPW: '', userName: '', userBirth: '' });
-
+function JoinInsert({ onInsert }: UserProps) {
+  // const [value, setValue] = useState({ id: '', password: '', userName: '', userBirth: '' });
+  const [inputID, setID] = useState('');
+  const [inputPW, setPW] = useState('');
+  const [inputPWcheck, setPWcheck] = useState('');
+  const [inputName, setName] = useState('');
+  const [inputBirth, setBirth] = useState('');
   const onChangeInputId = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      id: e.target.value,
-      password: user.password,
-      checkPW: user.checkPW,
-      userName: user.userName,
-      userBirth: user.userBirth
-    });
-  }
+    setID(e.target.value)
+  };
   const onChangeInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      id: user.id,
-      password: e.target.value,
-      checkPW: user.checkPW,
-      userName: user.userName,
-      userBirth: user.userBirth
-    });
-  }
+    setPW(e.target.value)
+  };
   const onChangeInputCheckPW = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      id: user.id,
-      password: user.password,
-      checkPW: e.target.value,
-      userName: user.userName,
-      userBirth: user.userBirth
-    });
-  }
+    setPWcheck(e.target.value)
+  };
   const onChangeInputUserName = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      id: user.id,
-      password: user.password,
-      checkPW: user.checkPW,
-      userName: e.target.value,
-      userBirth: user.userBirth
-    });
-  }
+    setName(e.target.value)
+  };
   const onChangeInputUserBirth = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      id: user.id,
-      password: user.password,
-      checkPW: user.checkPW,
-      userName: user.userName,
-      userBirth: e.target.value
-    });
-  }
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('before===', user)
-    onInsert(user);
-    setUser({
-      id: '',
-      password: '',
-      checkPW: '',
-      userName: '',
-      userBirth: ''
-    });
-    console.log('after====', user)
+    setBirth(e.target.value)
+  };
+  const onSubmit = () => {
+    onInsert({ id: inputID, password: inputPW, userName: inputName, userBirth: inputBirth });
+    setID('');
+    setPW('');
+    setPWcheck('');
+    setName('');
+    setBirth('');
   }
 
   return (
@@ -225,7 +194,7 @@ function JoinInsert({ onInsert }: JoinProps) {
           </div>
           <div>
             <input type="text" placeholder="id입력"
-              value={user['id']}
+              value={inputID}
               name='id'
               onChange={onChangeInputId}
             />
@@ -237,7 +206,7 @@ function JoinInsert({ onInsert }: JoinProps) {
           </div>
           <div>
             <input type="password" placeholder="pw입력"
-              value={user['password']}
+              value={inputPW}
               name='password'
               onChange={onChangeInputPassword}
             />
@@ -247,7 +216,7 @@ function JoinInsert({ onInsert }: JoinProps) {
           </div>
           <div>
             <input type="password" placeholder="pw확인"
-              value={user['checkPW']}
+              value={inputPWcheck}
               name='checkPW'
               onChange={onChangeInputCheckPW} />
           </div>
@@ -258,7 +227,7 @@ function JoinInsert({ onInsert }: JoinProps) {
           </div>
           <div>
             <input type="text" placeholder="이름"
-              value={user['userName']}
+              value={inputName}
               name='userName'
               onChange={onChangeInputUserName} />
           </div>
@@ -269,7 +238,7 @@ function JoinInsert({ onInsert }: JoinProps) {
           </div>
           <div>
             <input type="date" placeholder="생년월일"
-              value={user['userBirth']}
+              value={inputBirth}
               name='userBirth'
               onChange={onChangeInputUserBirth} />
           </div>

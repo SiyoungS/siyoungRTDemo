@@ -20,7 +20,8 @@ const Nav = () => {
     [
       { name: "Main", address: "/" },
       { name: "Join", address: "/Join" },
-      { name: "Todo", address: "/Todo" }
+      { name: "Todo", address: "/Todo" },
+      { name: "Login", address: "/Login" }
     ]);
 
   console.log('test:', menuToggle, '\n', currentPageIndex)
@@ -36,7 +37,7 @@ const Nav = () => {
     //현재 페이지의 url로 메뉴 선택 css효과 사용
     let currentUrlName = window.location.pathname;
     // 로그인 중에 Login페이지 이동 막고, css효과 사용
-    let loginCheck = (name === "Login")
+    let loginCheck = (name === "Logins")
     return (
       <Link id={index + 'nav_items_id'} key={index} to={loginCheck ? '#' : `${address}`} className={style.navLink}
         aria-current={currentUrlName === address ? "page" : undefined}
