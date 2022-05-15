@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 // import { RootState } from "redux/modules";
 import { addUser } from "redux/modules/users";
 // import { RootState } from "redux/modules";
-
+import React from "react";
 import Join from "./Join";
 
 function JoinApp() {
@@ -16,9 +16,10 @@ function JoinApp() {
 
 
   return (
-    <>
+    <div>
       <Join onInsert={onInsert}></Join>
-    </>
+    </div>
+    
   )
 }
 

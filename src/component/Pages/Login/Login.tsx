@@ -36,19 +36,25 @@ function LoginPage({ users }: UserProps) {
     setPW(e.target.value)
   };
   const loginCheck = () => {
-    console.log('users::', users)
-    users.filter((v) => {
-      if (v.id === inputID) {
-        if (v.password === inputPW) {
-          return alert('login success');
-        } else {
-          return alert('login fail');
-        };
+    console.log('users::', users);
+    let loginCheckFlag = false;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id !== inputID) {
+        loginCheckFlag = false;
       } else {
-        return alert('login fail');
-      };
-    });
-
+        if (users[i].password !== inputPW) {
+          loginCheckFlag = false;
+        } else {
+          loginCheckFlag = true;
+          break;
+        }
+      }
+    };
+    if (!loginCheckFlag) {
+      return alert('login fail');
+    } else {
+      return alert('login success');
+    };
   }
 
   return (

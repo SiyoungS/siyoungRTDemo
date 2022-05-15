@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // 액션 타입 선언
 const ADD_USER = 'todos/ADD_USER' as const;
 const LOGIN_USER = 'todos/TOGGLE_USER' as const;
@@ -55,13 +57,27 @@ function users(
 ): UsersState {
   switch (action.type) {
     case ADD_USER:
-      return state.concat({
-        // action.payload 객체 안의 값이 모두 유추됩니다.
-        id: action.payload.id,
-        password: action.payload.password,
-        userName: action.payload.userName,
-        userBirth: action.payload.userBirth
+      let url = 'http://localhost:5001/auth/register';
+      let data = {
+        "userId":action.payload.id,
+        "username":action.payload.userName,
+        "password":action.payload.password,
+        "authorities":["ROLE_USER"]
+    }
+      let result = axios.post(url,data,{
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json"
+      }
       });
+      console.log('result==',result);
+      // return state.concat({
+      //   // action.payload 객체 안의 값이 모두 유추됩니다.
+      //   id: action.payload.id,
+      //   password: action.payload.password,
+      //   userName: action.payload.userName,
+      //   userBirth: action.payload.userBirth
+      // });
     case LOGIN_USER:
       state.map(user =>
         // payload 가 number 인 것이 유추됩니다.

@@ -1,10 +1,10 @@
-import JoinApp from 'component/\bPages/Join/JoinApp';
+import JoinApp from 'component/Pages/Join/JoinApp';
 import TodoApp from 'component/Todo/TodoContainer/TodoApp';
 import React, { } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '../Pages/Home';
+import Home from '../Pages/Home';
 import Nav from '../Nav/Nav';
-import Login from '../Pages/Login';
+import Login from '../Pages/Login';
 
 const App = () => {
 
