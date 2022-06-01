@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 액션 타입 선언
 const ADD_USER = 'todos/ADD_USER' as const;
-const LOGIN_USER = 'todos/TOGGLE_USER' as const;
+const LOGIN_USER = 'todos/LOGIN_USER' as const;
 const REMOVE_USER = 'todos/REMOVE_USER' as const;
 
 // let nextId = 1; // 새로운 항목을 추가 할 때 사용 할 고유 ID 값
@@ -27,7 +27,8 @@ export const loginUser = (user: { id: string, password: string }) => ({
   type: LOGIN_USER,
   payload: {
     id: user.id,
-    password: user.password
+    password: user.password,
+    done: false
   }
 });
 
@@ -51,38 +52,72 @@ export type UsersState = User[];
 const initialState: UsersState = [];
 
 // 리듀서 작성
-function users(
+async function users(
   state: UsersState = initialState,
   action: UsersAction
-): UsersState {
+): Promise<UsersState | Promise<any>> {
   switch (action.type) {
     case ADD_USER:
+      // const newState = {...state}; 스테이트 불변성을 위해서 
       let url = 'http://localhost:5001/auth/register';
       let data = {
-        "userId":action.payload.id,
-        "username":action.payload.userName,
-        "password":action.payload.password,
-        "authorities":["ROLE_USER"]
-    }
-      let result = axios.post(url,data,{
+        "userId": action.payload.id,
+        "username": action.payload.userName,
+        "password": action.payload.password,
+        "authorities": ["ROLE_USER"]
+      }
+      let result = axios.post(url, data, {
         headers: {
           "accept": "application/json",
           "Content-Type": "application/json"
-      }
+        }
       });
-      console.log('result==',result);
-      // return state.concat({
-      //   // action.payload 객체 안의 값이 모두 유추됩니다.
-      //   id: action.payload.id,
-      //   password: action.payload.password,
-      //   userName: action.payload.userName,
-      //   userBirth: action.payload.userBirth
-      // });
+      console.log('result==', result);
+
+      // return state;
+      // console.log('조인 리덕스 들어옴');
+      return state.concat({
+        // action.payload 객체 안의 값이 모두 유추됩니다.
+        id: action.payload.id,
+        password: action.payload.password,
+        userName: action.payload.userName,
+        userBirth: action.payload.userBirth,
+      });
+
     case LOGIN_USER:
-      state.map(user =>
-        // payload 가 number 인 것이 유추됩니다.
-        // user.id === action.payload ? { ...user, done: !user.done } : user
-        user.id === action.payload.id ? (user.password === action.payload.password ? true : false) : false
+      // console.log('로그인 유저 리덕스 들어옴');
+
+      // console.log('id::', action.payload.id)
+      // console.log('pwpw::', action.payload.password)
+      // let url_login = "http://localhost:5001/auth/login";
+      // let data_login = {
+      //   "userId": action.payload.id,
+      //   "password": action.payload.password
+      // }
+      // let result_login = await axios.post(url_login, data_login,
+      //   {
+      //     headers: {
+      //       "accept": "application/json",
+      //       "Content-Type": "application/json"
+      //     }
+      //   }
+      // ).then((res) => {
+      //   console.log('res=', res)
+      // }, (rej) => {
+      //   console.log('reject=', rej);
+      // }).catch((err) => {
+      //   console.log('ERROR =', err);
+      // });
+      // console.log('result login=', result_login);
+      // state.map(user =>
+      //   // payload 가 number 인 것이 유추됩니다.
+      //   // user.id === action.payload ? { ...user, done: !user.done } : user
+      //   user.id === action.payload.id ? (user.password === action.payload.password ? true : false) : false
+      // );
+
+      console.log('로그인 유저 리듀서 들어옴');
+      return state.map((user) =>
+        user.id === action.payload.id ? (user.password === action.payload.password ? action.payload.done = true : false) : false
       );
     case REMOVE_USER:
     // payload 가 number 인 것이 유추됩니다.

@@ -21,7 +21,8 @@ const Nav = () => {
       { name: "Main", address: "/" },
       { name: "Join", address: "/Join" },
       { name: "Todo", address: "/Todo" },
-      { name: "Login", address: "/Login" }
+      { name: "Login", address: "/Login" },
+      { name: "Board", address: "/Board" },
     ]);
 
   console.log('test:', menuToggle, '\n', currentPageIndex)
